@@ -5,15 +5,8 @@
 [![Python Version](https://img.shields.io/badge/Python-3.10-green)](https://www.python.org/downloads/)
 [![Docker](https://img.shields.io/badge/Docker-Enabled-blue)](https://www.docker.com/)
 
-## 🌟 Features
-- **Real-time Inventory Tracking**: Manage products, categories, and stock levels.
-- **Sales & Purchase Management**: Easy-to-use interfaces for billing and purchasing.
-- **AI-Powered WhatsApp Bot**: 
-  - Get instant sales summaries.
-  - Check debt and top customers.
-  - Create purchase orders via natural language.
-- **PgAdmin Integration**: Direct database management via a secure UI.
-- **Fully Dockerized**: Deployment-ready with Docker Compose profiles.
+## 📝 Description
+**SmartStock** is a comprehensive solution for managing business operations with a focus on user experience and modern technologies. It features robust inventory tracking, vendor/customer management, billing, invoicing, and real-time WhatsApp integration via WPPConnect.
 
 ## 🚀 Quick Start (with Docker)
 
@@ -42,34 +35,57 @@ SmartStock uses **Docker Profiles** to manage services efficiently:
     ```bash
     docker compose --profile sales --profile wppconnect up -d
     ```
+*   **Admin Tools (PgAdmin):**
+    ```bash
+    docker compose --profile admin up -d
+    ```
 
 ### 4. Access the Application
 - **Web App:** [http://localhost:8000](http://localhost:8000)
+- **PgAdmin:** [http://localhost:5052](http://localhost:5052)
 - **WhatsApp API:** [http://localhost:21465](http://localhost:21465)
 
-## � Screenshots
+## 🛠 Manual Installation (Without Docker)
 
-### 🤖 AI WhatsApp Assistant
-<div align="center">
-  <img src="docs/screenshots/whatsapp_sales_stats.png" alt="Sales Stats" width="45%" />
-  <img src="docs/screenshots/whatsapp_analytics.png" alt="Analytics" width="45%" />
-  <br>
-  <img src="docs/screenshots/whatsapp_purchase_flow.png" alt="Purchase Flow" width="90%" />
-</div>
-
-### 🏢 Web Dashboard & Integration
 <details>
-  <summary>Click to view system screenshots</summary>
+<summary>Click to view manual setup steps</summary>
 
-  #### 📊 Inventory Management
-  ![Invoices](https://github.com/user-attachments/assets/5b176c44-82dd-4080-8259-0976029a496f)
-  
-  #### 🔗 WPPConnect Integration
-  ![Integration Detail](docs/screenshots/app_detail.png)
-  ![Conversations](docs/screenshots/conversations_list.png)
-  
-  #### ⚙️ Configuration
-  ![Config](docs/screenshots/config_update.png)
+### Prerequisites
+- Python 3.10+
+- PostgreSQL
+
+### Steps
+1. **Set Up Virtual Environment**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate # Linux
+    # or
+    venv\Scripts\activate # Windows
+    ```
+
+2. **Install Dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Database & Migrations**
+    Configure your `.env` with local DB credentials, then:
+    ```bash
+    python manage.py migrate
+    python manage.py runserver
+    ```
+</details>
+
+## 📸 Screenshots
+
+<details>
+  <summary>Click to view screenshots</summary>
+
+  ![screenshot_1](https://github.com/user-attachments/assets/9bb2f5f9-d456-4681-b5de-8d82a3ef97d8)
+  ![screenshot_2](https://github.com/user-attachments/assets/d6e14ba3-8827-41c1-9cdb-8f24add83f4d)
+  ![screenshot_3](https://github.com/user-attachments/assets/6be5060e-974b-4289-bcdf-b852771833f8)
+  ![screenshot_4](https://github.com/user-attachments/assets/5b176c44-82dd-4080-8259-0976029a496f)
+
 </details>
 
 ## 👥 Author
