@@ -55,16 +55,20 @@ SmartStock uses Docker Profiles for flexibility:
 
 ### 🏢 Web Management & Integration
 <details>
-<summary>Click to view system & integration screenshots</summary>
+  <summary>Click to view system & integration screenshots</summary>
 
-#### 🔗 Integration Detail
-![Integration Detail](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/app_detail.png)
+  #### 🔗 Integration Detail
+  ![Integration Detail](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/app_detail.png)
 
-#### 💬 Conversations Logging
-![Conversations List](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/conversations_list.png)
+  ![Edit App](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/app_edit.png)
 
-#### ⚙️ Configuration
-![Config Update](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/config_update.png)
+  #### 💬 Conversations Logging
+  ![Conversations List](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/conversations_list.png)
+
+  ![Conversation Detail](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/conversation_detail.png)
+
+  #### ⚙️ Configuration
+  ![Config Update](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/config_update.png)
 </details>
 
 ### 🖼 Full System Gallery
