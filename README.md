@@ -1,4 +1,4 @@
-# 📦 SmartStock - Sales & Inventory Management
+<img width="1024" height="515" alt="config_update" src="https://github.com/user-attachments/assets/56ad1bf4-5952-438f-a0fb-9379dc8d5e96" /># 📦 SmartStock - Sales & Inventory Management
 ### Integrated with AI WhatsApp Assistant
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit)
@@ -58,17 +58,26 @@ SmartStock uses Docker Profiles for flexibility:
   <summary>Click to view system & integration screenshots</summary>
 
   #### 🔗 Integration Detail
-  ![Integration Detail](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/app_detail.png)
+ <img width="1024" height="519" alt="app_detail" src="https://github.com/user-attachments/assets/c7147377-4a64-47b0-b7f4-22b71b882eac" />
+<img width="1024" height="562" alt="app_edit" src="https://github.com/user-attachments/assets/3431792f-81fe-49ff-829f-9fc825a40f69" />
+<img width="1024" height="515" alt="config_update" src="https://github.com/user-attachments/assets/87a985cc-ca2f-4173-bead-7fd430ff2182" />
 
-  ![Edit App](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/app_edit.png)
 
   #### 💬 Conversations Logging
-  ![Conversations List](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/conversations_list.png)
+<img width="1024" height="518" alt="conversations_list" src="https://github.com/user-attachments/assets/d08f2161-18e5-401f-9751-d809004a8388" />
+<img width="1024" height="517" alt="conversation_detail" src="https://github.com/user-attachments/assets/c0bd0827-1616-41a0-8a7b-a4ef9b19e205" />
 
-  ![Conversation Detail](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/conversation_detail.png)
+
 
   #### ⚙️ Configuration
-  ![Config Update](https://raw.githubusercontent.com/zaalmelahi/SmartStock/main/docs/screenshots/config_update.png)
+  <img width="1024" height="515" alt="config_update" src="https://github.com/user-attachments/assets/60cb0e53-0d28-4bae-a1d5-e12dd210189b" />
+
+#### ⚙️ WhatsApp
+<img width="1024" height="728" alt="whatsapp_sales_stats" src="https://github.com/user-attachments/assets/ebe6bb35-c95d-46e7-b2e2-1cb4cd98eb1c" />
+<img width="1024" height="575" alt="whatsapp_purchase_flow" src="https://github.com/user-attachments/assets/f5a384ce-92a6-4817-b746-c38fc360808b" />
+<img width="1024" height="627" alt="whatsapp_analytics" src="https://github.com/user-attachments/assets/8295e483-2e34-4937-bef8-849bd2850845" />
+
+
 </details>
 
 ### 🖼 Full System Gallery
