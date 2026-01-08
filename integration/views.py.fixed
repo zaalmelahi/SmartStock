@@ -1,0 +1,90 @@
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.views import View
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from .models import Application, ApplicationConfiguration
+from .forms import ApplicationForm, ApplicationConfigurationForm
+
+# Application Views
+class ApplicationListView(LoginRequiredMixin, ListView):
+    model = Application
+    template_name = 'integration/application_list.html'
+    context_object_name = 'applications'
+    paginate_by = 10
+
+class ApplicationCreateView(LoginRequiredMixin, CreateView):
+    model = Application
+    form_class = ApplicationForm
+    template_name = 'integration/application_form.html'
+    success_url = reverse_lazy('application-list')
+
+class ApplicationUpdateView(LoginRequiredMixin, UpdateView):
+    model = Application
+    form_class = ApplicationForm
+    template_name = 'integration/application_form.html'
+    success_url = reverse_lazy('application-list')
+
+class ApplicationDeleteView(LoginRequiredMixin, DeleteView):
+    model = Application
+    template_name = 'integration/application_confirm_delete.html'
+    success_url = reverse_lazy('application-list')
+
+class ApplicationDetailView(LoginRequiredMixin, DetailView):
+    model = Application
+    template_name = 'integration/application_detail.html'
+    context_object_name = 'application'
+
+class ApplicationActionView(LoginRequiredMixin, View):
+    """Base view for application actions with feedback"""
+    action_name = ""
+    
+    def post(self, request, pk):
+        application = get_object_or_404(Application, pk=pk)
+        # Placeholder for actual logic
+        messages.info(request, f"Action '{self.action_name}' triggered for {application.name}.")
+        return redirect('application-detail', pk=pk)
+
+class ApplicationStartSessionView(ApplicationActionView):
+    action_name = "Start Session"
+
+class ApplicationGetQRCodeView(ApplicationActionView):
+    action_name = "Get QR Code"
+
+class ApplicationCloseSessionView(ApplicationActionView):
+    action_name = "Close Session"
+
+class ApplicationRestartSessionView(ApplicationActionView):
+    action_name = "Restart Session"
+
+class ApplicationSyncContactsView(ApplicationActionView):
+    action_name = "Sync Contacts"
+
+class ApplicationSyncMessagesView(ApplicationActionView):
+    action_name = "Sync Messages"
+
+
+# ApplicationConfiguration Views
+class ConfigListView(LoginRequiredMixin, ListView):
+    model = ApplicationConfiguration
+    template_name = 'integration/config_list.html'
+    context_object_name = 'configs'
+    paginate_by = 10
+
+class ConfigCreateView(LoginRequiredMixin, CreateView):
+    model = ApplicationConfiguration
+    form_class = ApplicationConfigurationForm
+    template_name = 'integration/config_form.html'
+    success_url = reverse_lazy('config-list')
+
+class ConfigUpdateView(LoginRequiredMixin, UpdateView):
+    model = ApplicationConfiguration
+    form_class = ApplicationConfigurationForm
+    template_name = 'integration/config_form.html'
+    success_url = reverse_lazy('config-list')
+
+class ConfigDeleteView(LoginRequiredMixin, DeleteView):
+    model = ApplicationConfiguration
+    template_name = 'integration/config_confirm_delete.html'
+    success_url = reverse_lazy('config-list')

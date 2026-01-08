@@ -1,0 +1,81 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}Conversations{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="container my-4">
+        <div class="card shadow-sm rounded p-3">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h4 class="display-6 mb-0 text-success">Conversations</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4">
+        <table class="table table-bordered table-striped table-hover table-sm">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Session ID</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Application</th>
+                    <th scope="col">Started At</th>
+                    <th scope="col">Last Updated</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for conversation in conversations %}
+                <tr>
+                    <th scope="row text-center">{{ conversation.id }}</th>
+                    <td>
+                        <a href="{% url 'conversation-detail' conversation.pk %}"
+                            class="text-decoration-none fw-bold text-success">
+                            {{ conversation.session_id|truncatechars:30 }}
+                        </a>
+                    </td>
+                    <td>{{ conversation.user_identifier|default:"N/A" }}</td>
+                    <td>{{ conversation.application.name }}</td>
+                    <td>{{ conversation.started_at|date:"Y-m-d H:i" }}</td>
+                    <td>{{ conversation.updated_at|date:"Y-m-d H:i" }}</td>
+                    <td>
+                        <a class="btn btn-outline-success btn-sm me-1"
+                            href="{% url 'conversation-detail' conversation.pk %}">
+                            <i class="fa-solid fa-eye"></i> View
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center">No conversations found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if is_paginated %}
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+            </li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+            <li class="page-item {% if page_obj.number == i %}active{% endif %}">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+            {% endfor %}
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock content %}

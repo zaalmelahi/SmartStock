@@ -25,7 +25,8 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Products</span>
+                                            <span
+                                                class="h6 font-semibold text-muted text-sm d-block mb-2">Products</span>
                                             <span class="h3 font-bold mb-0">{{total_items}}</span>
                                         </div>
                                         <div class="col-auto">
@@ -75,7 +76,8 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
-                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Pending deliveries</span>
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Pending
+                                                deliveries</span>
                                             <span class="h3 font-bold mb-0">{{delivery.count}}</span>
                                         </div>
                                         <div class="col-auto">
@@ -119,10 +121,39 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-xl-3 col-sm-6 col-12" id="flowise">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#flowiseEmbedModal">
+                            <div class="card shadow border-0">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col">
+                                            <span class="h6 font-semibold text-muted text-sm d-block mb-2">Flowise
+                                                Embed</span>
+                                            <span class="h3 font-bold mb-0">{{flow_configs_count}}</span>
+                                        </div>
+                                        <div class="col-auto">
+                                            <div class="icon icon-shape bg-success text-white text-lg rounded-circle">
+                                                <i class="fa fa-code"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2 mb-0 text-sm">
+                                        <span class="badge badge-pill bg-soft-info text-info me-2">
+                                            <i class="fa fa-robot me-1"></i>AI
+                                        </span>
+                                        <span class="text-nowrap text-xs text-muted">Flow AI Configurations</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
                 {% include 'store/charts.html' %}
             </div>
         </main>
     </div>
 </div>
+
+
+
 {% endblock content %}

@@ -16,3 +16,25 @@ openpyxl==3.1.5
 phonenumbers==8.13.43
 requests==2.32.3
 tablib==3.6.1
+
+# Security Packages
+django-axes==6.5.1
+django-otp==1.5.4
+django-two-factor-auth[phonenumber,yubikey]==1.17.0
+argon2-cffi==23.1.0
+cryptography==45.0.6
+djangorestframework==3.15.2
+
+# AI Agent Packages
+langchain==1.2.0
+langchain-core
+langgraph==1.0.5
+langchain-openai
+python-dotenv
+
+
+psycopg2-binary==2.9.9
+
+# Production Server
+gunicorn==23.0.0
+uvicorn==0.38.0

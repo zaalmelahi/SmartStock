@@ -1,0 +1,94 @@
+networks:
+  sales-inventory-network:
+    driver: bridge
+    name: sales-inventory-network
+
+services:
+  # ===== SALES & INVENTORY MANAGEMENT PROFILE =====
+  web:
+    env_file:
+      - .env
+    build: ./
+    ports:
+      - "${WEB_PORT:-8000}:8000"
+    volumes:
+      - .:/app
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+      - ./logs:/app/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - sales-inventory-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/admin/login/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    profiles:
+      - sales
+
+  db:
+    image: postgres:15
+    env_file:
+      - .env
+    ports:
+      - "${POSTGRES_PORT:-5435}:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-sales_inventory}
+    restart: always
+    networks:
+      - sales-inventory-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-sales_inventory}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    profiles:
+      - sales
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    env_file:
+      - .env
+    ports:
+      - "${PGADMIN_PORT:-5052}:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@admin.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    networks:
+      - sales-inventory-network
+    profiles:
+      - admin
+
+  # ===== WPPCONNECT PROFILE =====
+  wppconnect:
+    image: wppconnect/server-cli:latest
+    volumes:
+      - wppconnect_tokens:/usr/src/wpp-server/tokens
+    ports:
+      - '${WPPCONNECT_PORT:-21465}:21465'
+    restart: always
+    networks:
+      - sales-inventory-network
+    profiles:
+      - wppconnect
+
+volumes:
+  static_volume:
+  media_volume:
+  db-data:
+  pgadmin-data:
+  wppconnect_tokens:

@@ -1,9 +1,89 @@
-__pycache__
-*.pyc
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
 
-*.log
-*.db
-*.sqlite3
-
+# Virtual environments
 venv/
 env/
+ENV/
+.venv
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile
+docker-compose.yml
+docker-compose-development.yml
+.dockerignore
+
+# Database
+*.sqlite3
+db.sqlite3
+*.db
+
+# Logs
+logs/
+*.log
+
+# Media files (these should be in volumes)
+media/
+
+# Environment files
+.env
+.env.*
+
+# Documentation
+*.md
+!README.md
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# CI/CD
+.github/
+
+# Compiled files
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Backup files
+*.bak
+*.backup
+
+# Static files (handled by collectstatic)
+staticfiles/
+static/
+
+# Project specific
+bin/
+data.json
+test_sqli.py

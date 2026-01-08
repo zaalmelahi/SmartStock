@@ -40,6 +40,7 @@ from django_tables2.export.views import ExportMixin
 # Local app imports
 from accounts.models import Profile, Vendor
 from transactions.models import Sale
+from integration.models import ApplicationConfiguration
 from .models import Category, Item, Delivery
 from .forms import ItemForm, CategoryForm, DeliveryForm
 from .tables import ItemTable
@@ -75,6 +76,10 @@ def dashboard(request):
     ]
     sale_dates_values = [float(date["total_sales"]) for date in sale_dates]
 
+    # Get Flow AI configurations
+    flow_configs = ApplicationConfiguration.objects.filter(flow_ai=True)
+    flow_configs_count = flow_configs.count()
+
     context = {
         "items": items,
         "profiles": profiles,
@@ -88,6 +93,8 @@ def dashboard(request):
         "category_counts": category_counts,
         "sale_dates_labels": sale_dates_labels,
         "sale_dates_values": sale_dates_values,
+        "flow_configs": flow_configs,
+        "flow_configs_count": flow_configs_count,
     }
     return render(request, "store/dashboard.html", context)
 

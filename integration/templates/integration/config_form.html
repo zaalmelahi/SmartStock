@@ -1,0 +1,310 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}Configuration Form{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 my-4">
+            <div class="card shadow-sm rounded p-4">
+                <h4 class="display-6 mb-4 text-success text-center">
+                    {% if object %}Update{% else %}New{% endif %} Configuration
+                </h4>
+                <form method="post" novalidate>
+                    {% csrf_token %}
+
+                    <!-- Basic Information -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fa-solid fa-info-circle"></i> Basic Information</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label
+                                        }}</label>
+                                    {{ form.name }}
+                                    {% for error in form.name.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BotPlatform Configuration -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fa-solid fa-robot"></i> BotPlatform Configuration</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.botpress_url.id_for_label }}" class="form-label">{{
+                                        form.botpress_url.label }}</label>
+                                    {{ form.botpress_url }}
+                                    {% for error in form.botpress_url.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.botpress_username.id_for_label }}" class="form-label">{{
+                                        form.botpress_username.label }}</label>
+                                    {{ form.botpress_username }}
+                                    {% for error in form.botpress_username.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="{{ form.botpress_password.id_for_label }}" class="form-label">{{
+                                        form.botpress_password.label }}</label>
+                                    {{ form.botpress_password }}
+                                    {% for error in form.botpress_password.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Configuration -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fa-solid fa-server"></i> System Configuration</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.system_url.id_for_label }}" class="form-label">{{
+                                        form.system_url.label }}</label>
+                                    {{ form.system_url }}
+                                    {% for error in form.system_url.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.url.id_for_label }}" class="form-label">{{ form.url.label
+                                        }}</label>
+                                    {{ form.url }}
+                                    {% for error in form.url.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.system_auth_info.id_for_label }}" class="form-label">{{
+                                        form.system_auth_info.label }}</label>
+                                    {{ form.system_auth_info }}
+                                    {% for error in form.system_auth_info.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.token.id_for_label }}" class="form-label">{{ form.token.label
+                                        }}</label>
+                                    {{ form.token }}
+                                    {% for error in form.token.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Flags -->
+                    <div class="card mb-3">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fa-solid fa-toggle-on"></i> Feature Flags</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        {{ form.use_voice_message }}
+                                        <label class="form-check-label" for="{{ form.use_voice_message.id_for_label }}">
+                                            {{ form.use_voice_message.label }}
+                                        </label>
+                                    </div>
+                                    {% for error in form.use_voice_message.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        {{ form.use_accounting_agent }}
+                                        <label class="form-check-label"
+                                            for="{{ form.use_accounting_agent.id_for_label }}">
+                                            {{ form.use_accounting_agent.label }}
+                                        </label>
+                                    </div>
+                                    {% for error in form.use_accounting_agent.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="form-check">
+                                        {{ form.flow_ai }}
+                                        <label class="form-check-label" for="{{ form.flow_ai.id_for_label }}">
+                                            {{ form.flow_ai.label }}
+                                        </label>
+                                    </div>
+                                    {% for error in form.flow_ai.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="{{ form.url_voice.id_for_label }}" class="form-label">{{
+                                        form.url_voice.label }}</label>
+                                    {{ form.url_voice }}
+                                    {% for error in form.url_voice.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flow AI Configuration -->
+                    <div class="card mb-3" id="flowAiConfigSection">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0"><i class="fa-solid fa-brain"></i> Flow AI Configuration</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="{{ form.flow_url.id_for_label }}" class="form-label">{{
+                                        form.flow_url.label }}</label>
+                                    {{ form.flow_url }}
+                                    {% for error in form.flow_url.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.flow_id.id_for_label }}" class="form-label">{{
+                                        form.flow_id.label }}</label>
+                                    {{ form.flow_id }}
+                                    {% for error in form.flow_id.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.flow_token.id_for_label }}" class="form-label">{{
+                                        form.flow_token.label }}</label>
+                                    {{ form.flow_token }}
+                                    <small class="form-text text-muted">Token will be encrypted when saved</small>
+                                    {% for error in form.flow_token.errors %}
+                                    <div class="text-danger small">{{ error }}</div>
+                                    {% endfor %}
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="button" class="btn btn-info text-white rounded-pill"
+                                        id="btnEmbedCode">
+                                        <i class="fa-solid fa-code"></i> Get Embed Code
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end gap-2 mt-4">
+                        <a href="{% url 'config-list' %}" class="btn btn-secondary rounded-pill">Cancel</a>
+                        <button type="submit" class="btn btn-success rounded-pill px-4">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Embed Code Modal -->
+<div class="modal fade" id="embedCodeModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-light">
+                <h5 class="modal-title"><i class="fa-solid fa-code text-primary"></i> Embed Chatbot Code</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Copy and paste the following code anywhere in the <code>&lt;body&gt;</code> tag of your website:</p>
+                <div class="position-relative">
+                    <textarea id="embedCodeContent" class="form-control bg-dark text-white font-monospace" rows="8"
+                        readonly></textarea>
+                    <button class="btn btn-sm btn-light position-absolute top-0 end-0 m-2" id="btnCopyEmbed"
+                        title="Copy to clipboard">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const flowAiCheckbox = document.getElementById('{{ form.flow_ai.id_for_label }}');
+        const flowAiConfigSection = document.getElementById('flowAiConfigSection');
+
+        function toggleFlowAiSection() {
+            if (flowAiCheckbox.checked) {
+                flowAiConfigSection.style.display = 'block';
+            } else {
+                flowAiConfigSection.style.display = 'none';
+            }
+        }
+
+        // Initial check
+        if (flowAiCheckbox && flowAiConfigSection) {
+            toggleFlowAiSection();
+            flowAiCheckbox.addEventListener('change', toggleFlowAiSection);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnEmbedCode = document.getElementById('btnEmbedCode');
+        const btnCopyEmbed = document.getElementById('btnCopyEmbed');
+
+        if (btnEmbedCode) {
+            btnEmbedCode.addEventListener('click', function () {
+                const flowUrlInput = document.getElementById('{{ form.flow_url.id_for_label }}');
+                const flowIdInput = document.getElementById('{{ form.flow_id.id_for_label }}');
+
+                // Get values and strip trailing slash from URL
+                const flowUrl = flowUrlInput.value ? flowUrlInput.value.replace(/\/$/, "") : "";
+                const flowId = flowIdInput.value;
+
+                if (!flowUrl || !flowId) {
+                    alert('Please fill in default "Flow URL" and "Flow ID" before generating embed code.');
+                    return;
+                }
+
+                const code = `<script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "${flowId}",
+        apiHost: "${flowUrl}",
+    })
+<\/script>`;
+
+                document.getElementById('embedCodeContent').value = code;
+                new bootstrap.Modal(document.getElementById('embedCodeModal')).show();
+            });
+        }
+
+        if (btnCopyEmbed) {
+            btnCopyEmbed.addEventListener('click', function () {
+                const copyText = document.getElementById("embedCodeContent");
+                copyText.select();
+                copyText.setSelectionRange(0, 99999); // For mobile devices
+                navigator.clipboard.writeText(copyText.value).then(() => {
+                    const originalIcon = btnCopyEmbed.innerHTML;
+                    btnCopyEmbed.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                    setTimeout(() => {
+                        btnCopyEmbed.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            });
+        }
+    });
+</script>
+{% endblock content %}

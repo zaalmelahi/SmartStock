@@ -1,0 +1,26 @@
+{% extends "store/base.html" %}
+{% block title %}Delete Application{% endblock title %}
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Confirm Deletion</h5>
+                </div>
+                <div class="card-body text-center">
+                    <p class="lead">Are you sure you want to delete the application: <strong>{{ object.name }}</strong>?
+                    </p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-grid gap-2 d-md-block mt-4">
+                            <button type="submit" class="btn btn-danger px-4">Delete</button>
+                            <a href="{% url 'application-list' %}" class="btn btn-secondary px-4">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

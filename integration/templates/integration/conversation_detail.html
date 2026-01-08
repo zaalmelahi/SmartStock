@@ -1,0 +1,73 @@
+{% extends "store/base.html" %}
+{% load static %}
+{% block title %}Conversation Details{% endblock title %}
+{% block content %}
+<div class="container">
+    <div class="container my-4">
+        <div class="card shadow-sm rounded p-3">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h4 class="display-6 mb-0 text-success">Conversation Details</h4>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end gap-2">
+                    <a class="btn btn-secondary btn-sm rounded-pill shadow-sm" href="{% url 'conversation-list' %}">
+                        <i class="fa-solid fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fa-solid fa-info-circle"></i> Conversation Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Session ID:</strong> {{ conversation.session_id }}</p>
+                        <p><strong>User Identifier:</strong> {{ conversation.user_identifier|default:"N/A" }}</p>
+                        <p><strong>Application:</strong> {{ conversation.application.name }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Started At:</strong> {{ conversation.started_at|date:"Y-m-d H:i:s" }}</p>
+                        <p><strong>Last Updated:</strong> {{ conversation.updated_at|date:"Y-m-d H:i:s" }}</p>
+                        <p><strong>Total Messages:</strong> {{ conversation.messages.count }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fa-solid fa-comments"></i> Messages</h5>
+            </div>
+            <div class="card-body" style="max-height: 600px; overflow-y: auto;">
+                {% for message in conversation.messages.all %}
+                <div class="mb-3 {% if message.direction == 'incoming' %}text-start{% else %}text-end{% endif %}">
+                    <div class="d-inline-block p-3 rounded {% if message.direction == 'incoming' %}bg-light{% else %}bg-success text-white{% endif %}"
+                        style="max-width: 70%;">
+                        <div class="mb-1">
+                            <strong>
+                                {% if message.direction == 'incoming' %}
+                                <i class="fa-solid fa-arrow-down text-primary"></i> Incoming
+                                {% else %}
+                                <i class="fa-solid fa-arrow-up text-white"></i> Outgoing
+                                {% endif %}
+                            </strong>
+                        </div>
+                        <div class="mb-2">{{ message.content }}</div>
+                        <small class="text-muted {% if message.direction == 'outgoing' %}text-white-50{% endif %}">
+                            {{ message.created_at|date:"Y-m-d H:i:s" }}
+                        </small>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center text-muted">No messages in this conversation.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

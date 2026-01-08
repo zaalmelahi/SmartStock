@@ -6,7 +6,12 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InventoryMS.settings')
+    try:
+        import dotenv
+        dotenv.load_dotenv()
+    except ImportError:
+        pass
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'InventoryMS.settings.local')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

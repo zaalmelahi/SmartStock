@@ -1,65 +1,189 @@
-
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        {% load static %}
-        <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/@webpixels/css@1.1.5/dist/index.css">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
-        {% block stylesheets %}{% endblock stylesheets %}
-        <title>IMS: {% block title %} {% endblock title %}</title>
 
-        <!-- Favicon -->
-        <link rel="icon" href="{% static 'images/logo/favicon.png' %}" type="image/png">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@webpixels/css@1.1.5/dist/index.css">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+  {% block stylesheets %}{% endblock stylesheets %}
+  <title>IMS: {% block title %} {% endblock title %}</title>
 
-    </head>
-    <body>
-      <style>
-        .paginator {
-          display: flex;
-          justify-content: center;
-        }
-      </style>
-        {% include "store/sidebar.html" %}
-        <section id="wrapper">
-            <nav class="navbar navbar-expand-md bg-success">
-                <div class="container-fluid mx-2">
-                  <div class="navbar-header">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                      <i class="fa fa-bars text-white"></i>
-                    </button>
-                    <a class="navbar-brand" style="font-size: 20px;" href="{% url 'dashboard' %}">Inventory<span class="text-warning">ms</span></a>
-                  </div>
-                  <div class="collapse navbar-collapse" id="toggle-navbar">
-                    <ul class="navbar-nav ms-auto">
-                      {% comment %} <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-bell"></i><span>98</span></a>
-                      </li> {% endcomment %}
-                      {% comment %} <li class="nav-item">
-                        <a class="nav-link" href="#">
-                          <i data-show="show-side-navigation1" class="fa fa-bars show-side-btn"></i>
-                        </a>
-                      </li> {% endcomment %}
-                    </ul>
-                  </div>
-                </div>
-              </nav>
-          {% block content%}
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'images/logo/favicon.png' %}" type="image/png">
 
-          {% endblock content%}
-        </section>
+</head>
+
+<body>
+  <style>
+    .paginator {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+  {% include "store/sidebar.html" %}
+  <section id="wrapper">
+    <nav class="navbar navbar-expand-md bg-success">
+      <div class="container-fluid mx-2">
+        <div class="navbar-header d-flex align-items-center">
+          <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar"
+            aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa fa-bars text-white"></i>
+          </button>
+          <!-- Sidebar Toggle Button for Desktop -->
+          <button class="btn btn-link text-white me-3 d-none d-md-block" id="sidebar-toggle">
+            <i class="fa fa-bars"></i>
+          </button>
+          <a class="navbar-brand" style="font-size: 20px;" href="{% url 'dashboard' %}">Inventory<span
+              class="text-warning">ms</span></a>
         </div>
-        <!-- Bootstrap core JavaScript-->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+        <div class="collapse navbar-collapse" id="toggle-navbar">
+          <ul class="navbar-nav ms-auto">
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-        <!-- Core plugin JavaScript-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    {% if messages %}
+    <div class="container-fluid mt-3">
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message|safe }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
 
-        {% block javascripts %}{% endblock javascripts %}
-      </body>
+    {% block content%}
+
+    {% endblock content%}
+  </section>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  {% block javascripts %}{% endblock javascripts %}
+  <script>
+    $(document).ready(function () {
+      $('#sidebar-toggle').on('click', function () {
+        $('#show-side-navigation1').toggleClass('minimized');
+        $('#wrapper').toggleClass('minimized');
+      });
+    });
+  </script>
+  <style>
+    #show-side-navigation1.minimized {
+      width: 60px;
+    }
+
+    #show-side-navigation1.minimized .ms-3,
+    #show-side-navigation1.minimized .nav-link span,
+    #show-side-navigation1.minimized h5,
+    #show-side-navigation1.minimized .badge {
+      display: none;
+    }
+
+    #wrapper.minimized {
+      margin-left: 60px !important;
+    }
+
+    #wrapper {
+      margin-left: 250px;
+      transition: all 0.3s;
+    }
+
+    .sidebar {
+      transition: all 0.3s;
+    }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // ... existing event listeners ...
+    });
+  </script>
+
+  {% if flow_configs %}
+  {% with config=flow_configs|first %}
+  <script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+      chatflowid: "{{ config.flow_id }}",
+      apiHost: "{% if config.flow_url %}{{ config.flow_url|slice:':-1' }}{% endif %}",
+      theme: {
+        button: {
+          backgroundColor: '#3B81F6',
+          right: 20,
+          bottom: 20,
+          size: 48,
+          dragAndDrop: true,
+          iconColor: 'white',
+          customIconSrc: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/google-messages.svg',
+          autoWindowOpen: {
+            autoOpen: false,
+            openDelay: 2,
+            autoOpenOnMobile: false
+          }
+        },
+        tooltip: {
+          showTooltip: true,
+          tooltipMessage: 'Hi There 👋!',
+          tooltipBackgroundColor: 'black',
+          tooltipTextColor: 'white',
+          tooltipFontSize: 16
+        },
+        chatWindow: {
+          showTitle: true,
+          title: '{{ config.name|default:"Flowise Bot" }}',
+          titleAvatarSrc: 'https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/svg/google-messages.svg',
+          welcomeMessage: 'Hello! How can I help you today?',
+          backgroundColor: '#ffffff',
+          height: 700,
+          width: 400,
+          fontSize: 16,
+          starterPrompts: [
+            "What can you do?",
+            "How do I use this?"
+          ],
+          botMessage: {
+            backgroundColor: '#f7f8ff',
+            textColor: '#303235',
+            showAvatar: true,
+            avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/parroticon.png'
+          },
+          userMessage: {
+            backgroundColor: '#3B81F6',
+            textColor: '#ffffff',
+            showAvatar: true,
+            avatarSrc: 'https://raw.githubusercontent.com/zahidkhawaja/langchain-chat-nextjs/main/public/usericon.png'
+          },
+          textInput: {
+            placeholder: 'Type your question',
+            backgroundColor: '#ffffff',
+            textColor: '#303235',
+            sendButtonColor: '#3B81F6',
+            autoFocus: true,
+            sendMessageSound: true,
+            receiveMessageSound: true
+          },
+          footer: {
+            textColor: '#303235',
+            text: 'Powered by',
+            company: 'Flowise',
+            companyLink: 'https://flowiseai.com'
+          }
+        }
+      }
+    })
+  </script>
+  {% endwith %}
+  {% endif %}
+</body>
+
 </html>
