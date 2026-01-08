@@ -55,6 +55,8 @@ SmartStock uses Docker Profiles for flexibility:
 ### 🏢 Web Management & Integration
 <details>
   <summary>Click to view system & integration screenshots</summary>
+  <img width="1600" height="935" alt="image" src="https://github.com/user-attachments/assets/3afb863e-3c16-4703-a05c-4f5d37a6a60d" />
+
 
   #### 🔗 Integration Detail
  <img width="1024" height="519" alt="app_detail" src="https://github.com/user-attachments/assets/c7147377-4a64-47b0-b7f4-22b71b882eac" />
@@ -127,8 +129,8 @@ SmartStock uses Docker Profiles for flexibility:
 5. **Run**: `python manage.py runserver`
 </details>
 
-## 👥 Authors
-- [Zaid Al-Melahi](https://github.com/zaalmelahi) - Integration & Dockerization
+## 👥 Author
+- [Zaid Al-Melahi](https://github.com/zaalmelahi)
 
 ---
 Happy coding! 🚀
