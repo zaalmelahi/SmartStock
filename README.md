@@ -1,4 +1,3 @@
-<img width="1024" height="515" alt="config_update" src="https://github.com/user-attachments/assets/56ad1bf4-5952-438f-a0fb-9379dc8d5e96" /># 📦 SmartStock - Sales & Inventory Management
 ### Integrated with AI WhatsApp Assistant
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/license/mit)
